@@ -11,7 +11,6 @@ use Spatie\Permission\Models\Permission;
 class DashboardController extends Controller
 {
     public function index(){
-        // dd(Auth::user()->hasPermissionTo('admin'));
         $books = Book::all();
         $authors = Author::wherestate(true)->get();
 

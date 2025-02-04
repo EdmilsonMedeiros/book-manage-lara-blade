@@ -41,11 +41,40 @@
 
                     <div class="mb-3">
                         <label for="cover" class="form-label">Capa do Livro</label>
-                        <input type="file" class="form-control" id="cover" name="cover" accept=".jpg,.jpeg,.png"
-                            onchange="resizeImage(this)">
-                        <img id="imagePreview" src="{{ isset($book) && $book->cover ? asset('storage/' . $book->cover) : '#' }}" 
-                            alt="Preview" style="max-width: 200px; margin-top: 10px; display: {{ isset($book) && $book->cover ? 'block' : 'none' }};">
+                        <input type="file" class="form-control" id="cover" name="cover" accept=".jpg,.jpeg,.png" onchange="previewImage(event)">
+                        
+                        <img id="imagePreview" 
+                            src="{{ isset($book) && $book->cover ? asset('storage/' . $book->cover) : '#' }}" 
+                            alt="Preview" 
+                            style="max-width: 200px; margin-top: 10px; {{ isset($book) && $book->cover ? '' : 'display: none;' }}">
                     </div>
+                    
+                    <script>
+                        function previewImage(event) {
+                            const input = event.target;
+                            const preview = document.getElementById('imagePreview');
+                            preview.src = null;
+                            if (input.files && input.files[0]) {
+                                const reader = new FileReader();
+                    
+                                reader.onload = function(e) {
+                                    preview.style.display = 'none';
+                                    preview.src = '';
+                                    setTimeout(() => {
+                                        preview.src = e.target.result;
+                                        preview.style.display = 'block';
+                                    }, 50);
+                                };
+                    
+                                reader.readAsDataURL(input.files[0]);
+                            }
+                        }
+                    </script>
+                    
+                    
+                    
+
+
                 </div>
 
                 @isset($book)

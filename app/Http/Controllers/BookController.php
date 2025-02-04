@@ -31,14 +31,12 @@ class BookController extends Controller
             'description'       => 'required|string',
             'author_id'         => 'required',
             'publish_date'      => 'required|date',
-            'description'       => 'nullable|string',
             'cover'             => 'nullable|mimes:jpg,jpeg,png|max:2048'
         ], $messages);
 
         if ($request->hasFile('cover')) {
             $file = $request->file('cover');
-            $filename = date('Y-m-d_H-i-s') . '_' . $file->getClientOriginalName();
-            $path = $file->storeAs('covers', $filename, 'public');
+            $path = ImageHelper::resizeImage($file);
             $validated['cover'] = $path;
         }
         

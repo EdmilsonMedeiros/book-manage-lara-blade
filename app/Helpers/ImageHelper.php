@@ -15,18 +15,14 @@ class ImageHelper
         $manager = new ImageManager(new Driver());
         $image = $manager->read($path);
         
-        // Get original dimensions
         $width = $image->width();
         $height = $image->height();
         
-        // Calculate new height maintaining aspect ratio
         $newWidth = 200;
         $newHeight = ($height / $width) * $newWidth;
         
-        // Resize with calculated dimensions
         $image->resize(width: $newWidth, height: (int)$newHeight);
         
-        // Save the resized image
         $image->save($path);
         $validated['cover'] = 'covers/' . $filename;
 

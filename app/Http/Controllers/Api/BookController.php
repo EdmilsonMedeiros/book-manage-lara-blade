@@ -131,7 +131,6 @@ class BookController extends Controller
                 'description'       => 'nullable|string',
                 'author_id'         => 'nullable',
                 'publish_date'      => 'nullable|date',
-                'description'       => 'nullable|string',
                 'cover'             => 'nullable|mimes:jpg,jpeg,png|max:2048'
             ], $messages);
 
