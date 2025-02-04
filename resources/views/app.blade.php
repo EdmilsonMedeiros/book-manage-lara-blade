@@ -42,5 +42,18 @@
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
 
     @stack('scripts')
+
+    <script>
+        // Seleciona todos os alertas
+        document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(() => {
+                let alerts = document.querySelectorAll('.alert');
+                alerts.forEach(alert => {
+                    let bsAlert = new bootstrap.Alert(alert);
+                    bsAlert.close(); // Fecha o alerta
+                });
+            }, 6000); // 6 segundos
+        });
+    </script>
 </body>
 </html>
